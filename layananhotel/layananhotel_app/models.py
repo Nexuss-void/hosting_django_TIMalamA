@@ -88,7 +88,7 @@ class Payment(models.Model):
         ("Belum Lunas","Belum Lunas"),
         ("Lunas","Lunas"),
     )
-
+    code = models.CharField(max_length=20)
     booking = models.ForeignKey(Booking, related_name="payment_booking", null=True, blank=True, on_delete=models.SET_NULL)
     jumlah = models.FloatField(default=0.0)
     method = models.CharField(max_length=50,choices=method_choice, default="Cash")
