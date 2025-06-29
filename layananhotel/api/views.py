@@ -8,7 +8,10 @@ from api.serializers import (
     ProfileSerializer, RoomTypeSerializer,
     RoomSerializer, BookingSerializer, ServiceSerializer, PaymentSerializer
 )
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
+@method_decorator(csrf_exempt, name='dispatch')
 class RoomGetPost(ListCreateAPIView):
     serializer_class = RoomSerializer
     queryset = Room.objects.all()
