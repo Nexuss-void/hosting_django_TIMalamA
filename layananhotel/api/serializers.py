@@ -1,13 +1,7 @@
 from rest_framework import serializers
 from layananhotel_app.models import User, Profile, RoomType, Room, Booking, Service, Payment
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_staff']
-
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = Profile
@@ -16,38 +10,27 @@ class ProfileSerializer(serializers.ModelSerializer):
 class RoomTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoomType
-        fields = ['id', 'name', 'price', 'description']
+        fields = ['id','code', 'name','description', 'price', ]
 
 class RoomSerializer(serializers.ModelSerializer):
-    room_type = serializers.PrimaryKeyRelatedField(queryset=RoomType.objects.all())
-
+    room_type=serializers.PrimaryKeyRelatedField(queryset=RoomType.objects.all())
     class Meta:
         model = Room
-        fields = ['id', 'number', 'room_type', 'status']
+        fields = ['id','code', 'room_type', 'status']
 
 class BookingSerializer(serializers.ModelSerializer):
-    guest = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
-    room = serializers.PrimaryKeyRelatedField(queryset=Room.objects.all())
-    check_in = serializers.DateTimeField()
-    check_out = serializers.DateTimeField()
-    status = serializers.CharField()
 
     class Meta:
         model = Booking
-        fields = ['id', 'code', 'guest', 'room', 'check_in', 'check_out', 'status']
+        fields = ['id','code', 'name_customer','phone','email','address', 'room', 'check_in', 'check_out', 'status','total_price']
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = ['id', 'code', 'name', 'price', 'description']
+        fields = ['id','code', 'name', 'price', 'description']
 
 class PaymentSerializer(serializers.ModelSerializer):
-    booking = serializers.PrimaryKeyRelatedField(queryset=Booking.objects.all())
-    amount = serializers.FloatField()
-    method = serializers.CharField()
-    status = serializers.CharField()
-    payment_date = serializers.DateTimeField()
 
     class Meta:
         model = Payment
-        fields = ['id', 'booking', 'amount', 'method', 'status', 'payment_date']
+        fields = ['id', 'booking', 'jumlah', 'method', 'status',]

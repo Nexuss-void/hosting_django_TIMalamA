@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+#Customize model user
+AUTH_USER_MODEL = 'layananhotel_app.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

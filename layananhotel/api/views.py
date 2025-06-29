@@ -5,7 +5,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework import permissions
 from layananhotel_app.models import User, Profile, RoomType, Room, Booking, Service, Payment
 from api.serializers import (
-    UserSerializer, ProfileSerializer, RoomTypeSerializer,
+    ProfileSerializer, RoomTypeSerializer,
     RoomSerializer, BookingSerializer, ServiceSerializer, PaymentSerializer
 )
 
@@ -17,7 +17,11 @@ class RoomGetUpDel(RetrieveUpdateDestroyAPIView):
     serializer_class = RoomSerializer
     queryset = Room.objects.all()
 
-class RoomTypeGet(ListAPIView):
+class RoomTypeGetPost(ListCreateAPIView):
+    serializer_class = RoomTypeSerializer
+    queryset = RoomType.objects.all()
+
+class RoomTypeGetUpDel(RetrieveUpdateDestroyAPIView):
     serializer_class = RoomTypeSerializer
     queryset = RoomType.objects.all()
 
@@ -29,14 +33,18 @@ class BookingGetUpDel(RetrieveUpdateDestroyAPIView):
     serializer_class = BookingSerializer
     queryset = Booking.objects.all()
 
-class ServiceGet(ListAPIView):
+class ServiceGetPost(ListCreateAPIView):
     serializer_class = ServiceSerializer
     queryset = Service.objects.all()
 
-class PaymentPost(CreateAPIView):
+class ServiceGetUpDel(RetrieveUpdateDestroyAPIView):
+    serializer_class = ServiceSerializer
+    queryset = Service.objects.all()
+
+class PaymentGetPost(ListCreateAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
 
-class ProfileGetUpDel(RetrieveUpdateDestroyAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profile.objects.all()
+class PaymentGetUpDel(RetrieveUpdateDestroyAPIView):
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
