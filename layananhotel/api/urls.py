@@ -2,7 +2,7 @@ from django.urls import path,include
 from api import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from api.views import (
-    RoomGetPost, RoomGetUpDel,
+    RoomGet,RoomPost, RoomGetUpDel,
     RoomTypeGetPost,RoomTypeGetUpDel, BookingGetPost, BookingGetUpDel,
     ServiceGetPost,ServiceGetUpDel, PaymentGetPost,PaymentGetUpDel
 )
@@ -10,7 +10,8 @@ from api.views import (
 app_name = 'api'
 
 urlpatterns = [
-    path('api/room_list', RoomGetPost.as_view()),
+    path('api/room_list', RoomGet.as_view()),
+    path('api/room_create', RoomPost.as_view()),
     path('api/room_detail/<int:pk>', RoomGetUpDel.as_view()),
 
     path('api/roomtype_list', RoomTypeGetPost.as_view()),

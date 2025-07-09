@@ -13,7 +13,12 @@ class RoomTypeSerializer(serializers.ModelSerializer):
         fields = ['id','code', 'name','description', 'price', ]
 
 class RoomSerializer(serializers.ModelSerializer):
-    room_type=serializers.PrimaryKeyRelatedField(queryset=RoomType.objects.all())
+    class Meta:
+        model = Room
+        fields = ['id','code', 'room_type', 'status']
+
+class RoomDetailSerializer(serializers.ModelSerializer):
+    room_type = RoomTypeSerializer()
     class Meta:
         model = Room
         fields = ['id','code', 'room_type', 'status']

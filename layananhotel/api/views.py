@@ -6,13 +6,17 @@ from rest_framework import permissions
 from layananhotel_app.models import User, Profile, RoomType, Room, Booking, Service, Payment
 from api.serializers import (
     ProfileSerializer, RoomTypeSerializer,
-    RoomSerializer, BookingSerializer, ServiceSerializer, PaymentSerializer
+    RoomSerializer, BookingSerializer, ServiceSerializer, PaymentSerializer,RoomDetailSerializer
 )
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 @method_decorator(csrf_exempt, name='dispatch')
-class RoomGetPost(ListCreateAPIView):
+class RoomGet(ListAPIView):
+    serializer_class = RoomDetailSerializer
+    queryset = Room.objects.all()
+
+class RoomPost(CreateAPIView):
     serializer_class = RoomSerializer
     queryset = Room.objects.all()
 
