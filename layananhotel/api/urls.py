@@ -3,7 +3,7 @@ from api import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from api.views import (
     RoomGet,RoomPost, RoomGetUpDel,
-    RoomTypeGetPost,RoomTypeGetUpDel, BookingGetPost, BookingGetUpDel,
+    RoomTypeGetPost,RoomTypeGetUpDel,RoomFilterAPIView, BookingGetPost, BookingGetUpDel,
     ServiceGetPost,ServiceGetUpDel, PaymentGetPost,PaymentGetUpDel
 )
 
@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('api/roomtype_list', RoomTypeGetPost.as_view()),
     path('api/roomtype_detail/<int:pk>', RoomTypeGetUpDel.as_view()),
+    path('api/room_filter/', views.RoomFilterAPIView.as_view(), name='menu-resto-filter'),
+
 
     path('api/booking_list', BookingGetPost.as_view()),
     path('api/booking_detail/<int:pk>', BookingGetUpDel.as_view()),

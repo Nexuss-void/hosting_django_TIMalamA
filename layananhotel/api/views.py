@@ -1,13 +1,11 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView, ListAPIView, RetrieveDestroyAPIView, UpdateAPIView
-from rest_framework import permissions
+from rest_framework import generics
 from layananhotel_app.models import User, Profile, RoomType, Room, Booking, Service, Payment
 from api.serializers import (
     ProfileSerializer, RoomTypeSerializer,
     RoomSerializer, BookingSerializer, ServiceSerializer, PaymentSerializer,RoomDetailSerializer
 )
+from django_filters.rest_framework import DjangoFilterBackend
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
@@ -55,3 +53,9 @@ class PaymentGetPost(ListCreateAPIView):
 class PaymentGetUpDel(RetrieveUpdateDestroyAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
+
+class RoomFilterAPIView(generics.ListAPIView):
+    queryset = Room.objects.all()
+    serializer_class = RoomSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['status', 'room_type']
