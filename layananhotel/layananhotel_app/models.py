@@ -46,6 +46,15 @@ class Room(models.Model):
     create_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True)
 
+def increment_booking_code():
+        last_code = Booking.objects.all().order_by('id').last()
+        if not last_code:
+            return 'BO-0001'
+        code = last_code.code
+        code_int = int(code[3:7])
+        new_code_int = code_int + 1
+        return 'BO-' + str(new_code_int).zfill(4)
+
 class Booking(models.Model):
     status_choice=(
         ("Pending","Pending"),
@@ -54,7 +63,7 @@ class Booking(models.Model):
     )
 
 
-    code = models.CharField(max_length=20)   
+    code = models.CharField(max_length=20,default=increment_booking_code, editable = False)   
     name_customer = models.CharField(max_length=100)
     phone = models.CharField(max_length=15, default="-")
     email = models.CharField(max_length=100, default="-")
