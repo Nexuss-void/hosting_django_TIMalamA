@@ -56,6 +56,6 @@ class PaymentGetUpDel(RetrieveUpdateDestroyAPIView):
 
 class RoomFilterAPIView(generics.ListAPIView):
     queryset = Room.objects.all()
-    serializer_class = RoomSerializer
+    serializer_class = RoomDetailSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['status', 'room_type']
